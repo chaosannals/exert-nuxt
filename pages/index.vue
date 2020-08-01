@@ -19,32 +19,46 @@
       </div>
     </div>
     <div v-for="t in testers" :key="t.id">
-      <span>{{t.username}}</span>
+      <span>{{t.id}}</span>
     </div>
   </div>
 </template>
 
 <script>
-// import mysql2 from "mysql2";
-
 export default {
   async asyncData(context) {
-    // const connection = mysql2.createConnection({
-    //   host: "localhost",
-    //   user: "root",
-    //   password: "root",
-    //   database: "t_test",
-    // });
-    // connection.execute("SELECT * FROM `t_id` WHERE `id` < ?", [100], function (
-    //   err,
-    //   results,
-    //   fields
-    // ) {
-    //   console.log(results);
-    //   console.log(fields);
-    // });
+    // let result = await context.$db.execute(
+    //   "SELECT * FROM `t_id` WHERE `id` < ?",
+    //   [100]
+    // );
+    let result = await context.$db.transact().then((db) => {
+      return new Promise((resolve, reject) => {
+        db.beginTransaction((err) => {
+          if (err) {
+            reject(err);
+          } else {
+            db.execute(
+              "SELECT * FROM `t_id` WHERE `id` < ?",
+              [100],
+              (err, data, fields) => {
+                if (err) {
+                  reject(err);
+                } else {
+                  resolve({
+                    data: data.map((i) => {
+                      return { ...i };
+                    }),
+                    fields,
+                  });
+                }
+              }
+            );
+          }
+        });
+      });
+    });
     return {
-      testers: [],
+      testers: result.data,
     };
   },
 };
