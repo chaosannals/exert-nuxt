@@ -18,19 +18,33 @@
         >GitHub</a>
       </div>
     </div>
+    <div v-for="t in testers" :key="t.id">
+      <span>{{t.username}}</span>
+    </div>
   </div>
 </template>
 
 <script>
+// import mysql2 from "mysql2";
+
 export default {
-  asyncData() {
+  async asyncData(context) {
+    // const connection = mysql2.createConnection({
+    //   host: "localhost",
+    //   user: "root",
+    //   password: "root",
+    //   database: "t_test",
+    // });
+    // connection.execute("SELECT * FROM `t_id` WHERE `id` < ?", [100], function (
+    //   err,
+    //   results,
+    //   fields
+    // ) {
+    //   console.log(results);
+    //   console.log(fields);
+    // });
     return {
-      tester: [
-        {
-          id: 1,
-          username: "asdfa",
-        },
-      ],
+      testers: [],
     };
   },
 };

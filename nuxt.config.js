@@ -66,5 +66,17 @@ export default {
   */
   build: {
     transpile: [/^element-ui/],
-  }
+    extend(config, ctx) {
+      // config.target = 'node';
+      config.node = {
+        console: true,
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty'
+      }
+    }
+  },
+  serverMiddleware: [
+    { path: '/api/tester', handler: '~/api/tester.js' }
+  ]
 }
