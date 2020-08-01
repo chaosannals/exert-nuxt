@@ -22,3 +22,11 @@ $ npm run generate
 ## Visual Studio Code
 
 安装 ESLint 和 stylelint 插件使自动格式化和项目匹配。
+
+ESLint 需要配置里打开 ESLint 的格式化 并 选择用 ESLint 的 格式化器。
+
+## Docker
+
+```sh
+docker build -t exert-nuxt .
+```
