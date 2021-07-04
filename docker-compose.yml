@@ -5,16 +5,16 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-    container_name: exert-nxut-demo
+    container_name: exert-nuxt-demo
     restart: always
     ports:
-      - "30000:3000"
+      - "3000:3000"
     volumes:
       - ./runtime/reception:/app/runtime
     networks:
-      - exert-nxut-net
+      - exert-nuxt-net
 
 networks:
-  exert-nxut-net:
-    name: exert-nxut-net
+  exert-nuxt-net:
+    name: exert-nuxt-net
     driver: bridge
