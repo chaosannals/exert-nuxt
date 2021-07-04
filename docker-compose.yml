@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  demo:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: exert-nxut-demo
+    restart: always
+    ports:
+      - "30000:3000"
+    volumes:
+      - ./runtime/reception:/app/runtime
+    networks:
+      - exert-nxut-net
+
+networks:
+  exert-nxut-net:
+    name: exert-nxut-net
+    driver: bridge
